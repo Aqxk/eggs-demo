@@ -33,8 +33,18 @@ module.exports = appInfo => {
         // 禁止修改表名，默认情况下，sequelize将自动将所有传递的模型名称（define的第一个参数）转换为复数
         // 但是为了安全着想，复数的转换可能会发生变化，所以禁止该行为
         freezeTableName: true
+      },
+      timezone: '+08:00',
+      dialectOptions: {  // 让读取date类型数据时返回字符串而不是UTC时间
+        dateStrings: true,
+        typeCast(field, next) {
+          if (field.type === "DATETIME") {
+            return field.string();
+          }
+          return next();
+        }
       }
-    },
+    }
   };
 
   return {
