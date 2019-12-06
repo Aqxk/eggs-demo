@@ -7,6 +7,7 @@ module.exports = app => {
     },
     { timestamps: true }
   );
-  // User.sync({ force: true });
+  // force // false 为不覆盖 true会删除再创建(慎用) alter // true可以 添加或删除字段
+  User.sync({ force: false, alter: true });
   return User;
 };
