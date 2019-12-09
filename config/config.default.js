@@ -16,8 +16,27 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1575531960303_1701';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['errorHandler'];
 
+  config.swaggerdoc = {
+    dirScanner: './app/controller',
+    apiInfo: {
+      title: '接口',
+      description: '接口文档说明',
+      version: '1.0.0'
+    },
+    schemes: ['http', 'https'],
+    consumes: ['application/json'],
+    produces: ['application/json'],
+    enableSecurity: false,
+    routerMap: true,
+    enable: true
+  }
+  config.jwt = {
+    secret: 'token',
+    enable: true,
+    match: /^\/api/,
+  }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -46,7 +65,6 @@ module.exports = appInfo => {
       }
     }
   };
-
   return {
     ...config,
     ...userConfig,

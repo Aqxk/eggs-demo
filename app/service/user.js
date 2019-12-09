@@ -11,4 +11,5 @@ class UserService extends Service {
     return await this.ctx.model.User.findAll();
   }
 }
+
 module.exports = UserService;
